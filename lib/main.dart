@@ -16,9 +16,17 @@ class MyApp extends StatelessWidget {
       title: 'Booking App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme(),
+        
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.interTextTheme(
+          
+        ),
         useMaterial3: true,
+        cardTheme: CardThemeData(
+          color: Colors.white
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Color.fromARGB(255, 248, 250, 255),
           selectedIconTheme: IconThemeData(
             color: Color.fromARGB(255, 73, 92, 245)
           ),
