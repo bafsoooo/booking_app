@@ -1,8 +1,20 @@
+import 'package:booking_app/utils/dot_indicator.dart';
+import 'package:booking_app/widgets/destination.dart';
 import 'package:booking_app/widgets/pour_vous.dart';
+import 'package:booking_app/mock_data.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget{
+
+class HomeScreen extends StatefulWidget{
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -100,16 +112,109 @@ class HomeScreen extends StatelessWidget{
                   SizedBox(
                     height: 10,
                   ),
+                   Column(
+                     children:[ 
+                       CarouselSlider.builder(
+                         itemCount: mockPourVousHotels.length,
+                         options: CarouselOptions(
+                           height: 370,
+                           aspectRatio: 16/9,
+                           viewportFraction: 0.8, // How much space the card takes up
+                           initialPage: 0,
+                           enableInfiniteScroll: true, // Loops forever
+                           reverse: false,
+                           autoPlay: true, // Swipes automatically
+                           autoPlayInterval: const Duration(seconds: 3),
+                           scrollDirection: Axis.horizontal,
+                           onPageChanged: (index, reason) => 
+                           setState(() {
+                             activeIndex = index;
+                           }),
+                         ),
+                         itemBuilder: (BuildContext context, int index, int realIndex) {
+                           return PourVous(hotel: mockPourVousHotels[index]);
+                         },
+                       ),
+                       const SizedBox(height: 24,),
+                       DotIndicator(activeIndex: activeIndex)
+                     ]
+                   ),
                   SizedBox(
-                    height: 300, 
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return PourVous(price: 7500, hotelName: "Hotel hyatt regency", location: "Alger centre , aireport");
-                      },
-                    ),
+                    height: 20,
                   ),
+                  // Destinations Tendance section
+                  Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                    children: [
+                      const Text(
+                        "Destinations Tendance",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                        ),
+                      ),
+                      Text(
+                        "See All >",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                   Column(
+                     children:[ 
+                       CarouselSlider.builder(
+                         itemCount: mockDestinationHotels.length,
+                         options: CarouselOptions(
+                           height: 400,
+                           aspectRatio: 16/9,
+                           viewportFraction: 0.8, // How much space the card takes up
+                           initialPage: 0,
+                           enableInfiniteScroll: true, // Loops forever
+                           reverse: false,
+                           autoPlay: true, // Swipes automatically
+                           autoPlayInterval: const Duration(seconds: 3),
+                           scrollDirection: Axis.horizontal,
+                           onPageChanged: (index, reason) => 
+                           setState(() {
+                             activeIndex = index;
+                           }),
+                         ),
+                         itemBuilder: (BuildContext context, int index, int realIndex) {
+                           return Destination(hotel: mockDestinationHotels[index]);
+                         },
+                       ),
+                       const SizedBox(height: 24,),
+                       DotIndicator(activeIndex: activeIndex)
+                     ]
+                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  // Destinations Tendance section
+                  Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                    children: [
+                      const Text(
+                        "Offres Spéciales",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                        ),
+                      ),
+                      Text(
+                        "See All >",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14
+                        ),
+                      ),
+                    ],
+                  ),  
                 ],
               ),
                

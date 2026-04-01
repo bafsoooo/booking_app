@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../mock_data.dart';
 
-class PourVous extends StatelessWidget {
+class Destination extends StatelessWidget {
   final Hotel hotel;
 
-  const PourVous({
+  const Destination({
     super.key,
     required this.hotel,
   });

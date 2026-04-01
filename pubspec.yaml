@@ -42,6 +42,12 @@ dependencies:
   carousel_slider: ^5.1.2
   intl: ^0.20.2
   google_fonts: ^8.0.2
+  smooth_page_indicator: ^2.0.1
+  latlong2: ^0.9.1
+  flutter_map_location_marker: ^10.2.0
+  http: ^1.6.0
+  location: ^8.0.1
+  flutter_polyline_points: ^3.1.0
 
 dev_dependencies:
   flutter_test:
