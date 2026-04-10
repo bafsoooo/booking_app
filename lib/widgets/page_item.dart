@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class PageItem extends StatelessWidget {
-  const PageItem({super.key, required this.text, required this.icon, this.color});
+  const PageItem({super.key, required this.text, required this.icon, this.color, required this.page});
 
   final String text;
   final IconData icon;
+  final Widget page;
   final Color? color;
 
   @override
@@ -26,7 +27,17 @@ class PageItem extends StatelessWidget {
               ),
             ),
           ),
-          Icon(Icons.arrow_forward_ios_outlined, size: 16, color: color ?? Colors.indigoAccent)
+          GestureDetector(
+            child: Icon(Icons.arrow_forward_ios_outlined, size: 16, color: color ?? Colors.indigoAccent),
+            onTap: () {
+              // Handle navigation or action here
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            },
+          )
+            
         ],
       ),
     );

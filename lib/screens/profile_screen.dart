@@ -1,3 +1,4 @@
+import 'package:booking_app/screens/informations_personel_screen.dart';
 import 'package:booking_app/widgets/page_item.dart';
 import 'package:booking_app/widgets/tag.dart';
 import 'package:flutter/material.dart';
@@ -93,10 +94,10 @@ class ProfileScreen extends StatelessWidget{
                     ),
                     const SizedBox(height: 30,),
                     //pages section
-                    PageItem(text: "Personal informations", icon: Icons.person_outline,),
-                    PageItem(text: "Destinations Sauvegarder", icon: Icons.bookmark_outline,),
-                    PageItem(text: "Historique Des Destinations ", icon: Icons.history_outlined,),
-                    PageItem(text: "Notifications Settings", icon: Icons.notifications_none_outlined,),
+                    PageItem(text: "Informations Personnel", icon: Icons.person_outline, page: InformationsPersonelScreen(),),
+                    PageItem(text: "Destinations Sauvegarder", icon: Icons.bookmark_outline,page: InformationsPersonelScreen()),
+                    PageItem(text: "Historique Des Destinations ", icon: Icons.history_outlined,page: InformationsPersonelScreen()),
+                    PageItem(text: "Notifications Settings", icon: Icons.notifications_none_outlined,page: InformationsPersonelScreen()),
 
                     // "Destination A venir" section
                     const SizedBox(height: 30,),
@@ -126,8 +127,8 @@ class ProfileScreen extends StatelessWidget{
                     Text("More" , style: TextStyle(fontSize: 18, color: Colors.deepOrangeAccent),),
                     const SizedBox(height: 20,),
                     // Language and logout options
-                    PageItem(text: "Language", icon: Icons.language_outlined),
-                    PageItem(text: "Logout", icon: Icons.logout_outlined, color: Colors.red,),
+                    PageItem(text: "Language", icon: Icons.language_outlined,page: InformationsPersonelScreen()),
+                    PageItem(text: "Logout", icon: Icons.logout_outlined, color: Colors.red,page: InformationsPersonelScreen()),
                   ]),
               )
             ],
