@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:location/location.dart';
 
 class ExploreScreen extends StatefulWidget{
   const ExploreScreen({super.key});
@@ -14,48 +13,8 @@ class ExploreScreen extends StatefulWidget{
 class _ExploreScreenState extends State<ExploreScreen> {
 
   final MapController _mapController = MapController();
-  final Location _locationService = Location();
-  final TextEditingController _searchController = TextEditingController();
-  bool isLoading = false;
-  LatLng? _currentLocation;
-  LatLng? _destinationLocation;
-  List<LatLng> _routePoints = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeLocationService();
-  }
-  Future<void> _initializeLocationService() async {
-    setState(() => isLoading = true);
-    try {
-      final permissionGranted = await _locationService.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Location permission denied. Please grant permission to use this feature."))
-        );
-        return;
-      }
-      final locationData = await _locationService.getLocation();
-      setState(() => _currentLocation = LatLng(locationData.latitude!, locationData.longitude!));
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error getting location: $e"))
-      );
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
-  Future<void> _getCurrentLocation() async {
-    if (_currentLocation != null) {
-      _mapController.move(_currentLocation!, 13.0);
-    }else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Unable to get current location. Please try again."))
-      );
-    };
-  }
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +23,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: _currentLocation ?? LatLng(36.75, 3.04),
+              initialCenter: LatLng(36.75, 3.04),
               initialZoom: 13.0,
               minZoom: 0,
               maxZoom: 100
@@ -89,7 +48,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        onPressed:_getCurrentLocation,
+        onPressed: () {
+          _mapController.move(LatLng(36.75, 3.04), 13.0);
+        },
         backgroundColor: Color.fromARGB(255, 73, 92, 245),
         foregroundColor: Colors.white,
         child:const Icon(
