@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Hotel {
   final String id;

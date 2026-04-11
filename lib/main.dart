@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         
         scaffoldBackgroundColor: Colors.white,
+        switchTheme: SwitchThemeData(
+          trackOutlineColor: WidgetStateProperty.all(Colors.grey),
+          trackOutlineWidth: WidgetStateProperty.all(1.5),
+        ),
         textTheme: GoogleFonts.interTextTheme(
           
         ),
