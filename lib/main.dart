@@ -1,9 +1,11 @@
+import "package:booking_app/provider/favorite_provider.dart";
 import "package:booking_app/screens/explore_screen.dart";
 import "package:booking_app/screens/home_screen.dart";
 import "package:booking_app/screens/planner_screen.dart";
 import "package:booking_app/screens/profile_screen.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:provider/provider.dart";
 
 void main() => runApp(const MyApp());
 
@@ -11,8 +13,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => FavoriteProvider(),)
+    ],
+    child: MaterialApp(
       title: 'Booking App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -40,9 +45,10 @@ class MyApp extends StatelessWidget {
         )
       ),
       home: const MainNavigation(),
-    );
-  }
+    ),
+  );
 }
+
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -52,20 +58,19 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
-
-  final _screens = const [
-    HomeScreen(),
-    ExploreScreen(),
-    PlannerScreen(),
-    ProfileScreen(),
-  ];
-
+ 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      HomeScreen(),
+      const ExploreScreen(),
+      const PlannerScreen(),
+      ProfileScreen(),
+    ];
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: _screens,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

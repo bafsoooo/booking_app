@@ -1,3 +1,4 @@
+import 'package:booking_app/provider/favorite_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -5,7 +6,6 @@ import '../mock_data.dart';
 
 class Destination extends StatelessWidget {
   final Hotel hotel;
-
   const Destination({
     super.key,
     required this.hotel,
@@ -13,6 +13,8 @@ class Destination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = FavoriteProvider.of(context);
+
     return SizedBox(
       width: 270,
       height: 240,
@@ -31,12 +33,17 @@ class Destination extends StatelessWidget {
                     imageUrl: hotel.imageUrl,
                     fit: BoxFit.cover,
                   ),
-                  Positioned(
-                    right: 14,
-                    top: 14,
-                    child: Icon(
-                      Icons.bookmark_border_outlined,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      provider.toggleFavorite(hotel);
+                    },
+                    child: Positioned(
+                      right: 14,
+                      top: 14,
+                      child: Icon(
+                        provider.isExist(hotel) ? Icons.bookmark : Icons.bookmark_border_outlined,
+                        color:Colors.white,
+                      ),
                     ),
                   )
                 ]
@@ -44,7 +51,7 @@ class Destination extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsGeometry.symmetric(vertical: 16 , horizontal: 20) ,
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,12 +1,20 @@
+import 'package:booking_app/screens/profile_screen/destination_sauvegrader_screen.dart';
 import 'package:booking_app/screens/profile_screen/informations_personel_screen.dart';
 import 'package:booking_app/screens/profile_screen/notifications_screen.dart';
 import 'package:booking_app/widgets/page_item.dart';
 import 'package:booking_app/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget{
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatefulWidget{
+  const ProfileScreen({
+    super.key,
+  });
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>{
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,7 +104,7 @@ class ProfileScreen extends StatelessWidget{
                     const SizedBox(height: 30,),
                     //pages section
                     PageItem(text: "Informations Personnel", icon: Icons.person_outline, page: InformationsPersonelScreen(),),
-                    PageItem(text: "Destinations Sauvegarder", icon: Icons.bookmark_outline,page: InformationsPersonelScreen()),
+                    PageItem(text: "Destinations Sauvegarder", icon: Icons.bookmark_outline,page: DestinationSauvegraderScreen()),
                     PageItem(text: "Historique Des Destinations ", icon: Icons.history_outlined,page: InformationsPersonelScreen()),
                     PageItem(text: "Notifications Settings", icon: Icons.notifications_none_outlined,page: NotificationsScreen()),
 

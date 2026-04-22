@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 
 class HomeScreen extends StatefulWidget{
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -185,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                            }),
                          ),
                          itemBuilder: (BuildContext context, int index, int realIndex) {
-                           return Destination(hotel: mockDestinationHotels[index]);
+                           return Destination(
+                             hotel: mockDestinationHotels[index]
+                           );
                          },
                        ),
                        const SizedBox(height: 24,),
